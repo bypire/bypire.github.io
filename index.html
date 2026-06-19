@@ -80,12 +80,12 @@
   <div class="wrap">
     <h1 class="name">Muhammet Emir Fil</h1>
     <p class="role">B.Sc. Computational Engineering Science &middot; RWTH Aachen</p>
-    <p class="tag">Computational engineering, with a focus on simulation and identification. Each
-      project builds a forward model, verifies it against an analytical solution, a published
-      benchmark or measured data, and then uses it to solve the associated inverse or optimisation
-      problem.</p>
-    <p class="seeking">Currently seeking a student research assistant (HiWi) position in
-      computational science and engineering.</p>
+    <p class="tag">I am a Computational Engineering Science student at RWTH Aachen. I like building
+      physics simulations and then checking whether they actually agree with something I can trust,
+      such as a textbook formula, a published benchmark, or real measured data. Below are a few of
+      the projects I have worked on.</p>
+    <p class="seeking">I am looking for a HiWi (student research assistant) position at a
+      computational chair.</p>
     <div class="links">
       <a href="https://github.com/bypire">GitHub</a>
       <a href="mailto:muhammetemirfil@gmail.com">Email</a>
@@ -95,11 +95,9 @@
 <div class="accent"></div>
 
 <div class="wrap">
-  <p class="intro">This portfolio collects four projects. Each one consists of a numerical solver
-    written in Python (NumPy), a short technical report that documents the method and its
-    verification, and, for most of them, an interactive demonstration that runs in the browser
-    without a server. The emphasis throughout is on results that can be checked against an
-    independent reference.</p>
+  <p class="intro">Each project has the code (Python, mostly NumPy), a short write-up as a PDF
+    explaining the method and where it is verified, and for most of them a demo that runs in the
+    browser. I try to keep every result tied to something I can check it against.</p>
 
   <main class="grid">
 
@@ -108,16 +106,13 @@
       <img class="thumb" src="assets/hub.png" alt="Multiphysics Hub: car on a bridge with aerodynamics and structural panels">
       <div class="body">
         <h2>Multiphysics Hub</h2>
-        <p class="sub">Coupled real-time simulation</p>
-        <p>An interactive application in which a single vehicle is driven in real time around an
-          editable track while three coupled simulations are recomputed every frame. The vehicle is
-          a four-wheel (double-track) model with Pacejka tyres and longitudinal and lateral load
-          transfer. A two-dimensional fluid solver computes the flow around the body and returns the
-          aerodynamic drag and downforce that act back on the tyres. A modal moving-load beam
-          represents a bridge that deflects under the wheel load. Each model is first verified in
-          Python against an analytical or finite-element reference, then reimplemented in
-          JavaScript; the two implementations agree to about 10<sup>-13</sup> for the vehicle and
-          10<sup>-9</sup> metres for the bridge.</p>
+        <p class="sub">Vehicle dynamics, CFD and structural dynamics in one</p>
+        <p>You drive a car around a track in the browser, and three simulations run under it at
+          once: a four-wheel car with Pacejka tyres, a 2D fluid that I run around the car body to
+          get drag and downforce, and a bridge that bends when you drive over it. I wrote each model
+          in Python and checked it, then ported it to JavaScript so it runs live; the two versions
+          agree to about 10<sup>-13</sup> for the car and 10<sup>-9</sup> m for the bridge. This one
+          ties together the three projects below.</p>
         <div class="tags"><span>Vehicle dynamics</span><span>CFD</span><span>Structural dynamics</span><span>Real-time JavaScript</span></div>
         <div class="btns">
           <a class="btn primary" href="https://bypire.github.io/multiphysics-hub/">Live demo</a>
@@ -132,16 +127,14 @@
       <img class="thumb" src="assets/vbi.png" alt="Bridge Weigh-in-Motion interactive demonstration">
       <div class="body">
         <h2>Bridge Weigh-in-Motion</h2>
-        <p class="sub">Inverse problem and uncertainty quantification</p>
-        <p>An instrumented bridge can be used to weigh trucks in motion by inverting its measured
-          bending response. This project implements the forward model, an Euler-Bernoulli beam under
-          a moving, suspension-coupled vehicle load, and the recovery of the axle weights from the
-          response. The recovery is treated as an ill-posed inverse problem: Tikhonov regularisation
-          with L-curve parameter selection stabilises the closely spaced (tandem) axle case, and a
-          Bayesian formulation returns a credible interval whose width is calibrated from the model
-          error rather than assumed. The forward model is verified against the Frýba closed-form
-          solution, and the structural-health component is validated against sixteen months of
-          measured modal data from the KW51 bridge.</p>
+        <p class="sub">An inverse problem with honest error bars</p>
+        <p>If you put strain sensors on a bridge, you can weigh the trucks driving over it by working
+          backwards from how the bridge bends. I built the forward simulation (a beam under a moving,
+          bouncing vehicle) and then the inverse that recovers the axle weights. The inverse is
+          ill-posed when two axles are close together, so I added Tikhonov regularisation, and a
+          Bayesian version to get a real error bar instead of a guessed one. I checked the forward
+          model against Frýba's closed-form solution, and tested the monitoring idea on 16 months of
+          actual measurements from the KW51 bridge.</p>
         <div class="tags"><span>Inverse problems</span><span>Finite elements</span><span>Bayesian UQ</span><span>Regularisation</span></div>
         <div class="btns">
           <a class="btn primary" href="https://bypire.github.io/bridgebeat/">Live demo</a>
@@ -156,15 +149,13 @@
       <img class="thumb" src="assets/racing.png" alt="Optimal racing line coloured by speed, with g-g diagram">
       <div class="body">
         <h2>Optimal Racing Line</h2>
-        <p class="sub">Trajectory optimisation and optimal control</p>
-        <p>The fastest line around a circuit is computed as the solution of a minimum-lap-time
-          optimal-control problem rather than prescribed by hand. Taking arc length along the track
-          as the independent variable removes the free final time, and the problem is transcribed to
-          a nonlinear program by trapezoidal direct collocation with analytically derived Jacobians,
-          then solved by sequential quadratic programming. On a 2.4 km circuit the optimised line is
-          8.1 percent faster than the geometric centreline and operates at the tyre grip limit for
-          almost the entire lap. The result is verified against the closed-form skidpad lap time and
-          confirmed to converge under mesh refinement.</p>
+        <p class="sub">Trajectory optimisation</p>
+        <p>Instead of drawing the fastest line around a track by hand, I set it up as an
+          optimal-control problem and let a solver find it. I used arc length along the track as the
+          variable, discretised it with direct collocation, worked out the Jacobians by hand, and
+          solved it with SciPy. On a 2.4 km track the optimised line comes out 8.1 percent faster
+          than just following the centreline, and I checked the lap time against the closed-form
+          skidpad result.</p>
         <div class="tags"><span>Optimal control</span><span>Direct collocation</span><span>Nonlinear programming</span><span>Vehicle dynamics</span></div>
         <div class="btns">
           <a class="btn primary" href="https://bypire.github.io/optimal-racing-line/">Live demo</a>
@@ -178,15 +169,13 @@
     <article class="card">
       <img class="thumb" src="assets/cfd.png" alt="von Karman vortex street vorticity field at Reynolds number 100">
       <div class="body">
-        <h2>Incompressible Flow Solver</h2>
+        <h2>2D Navier-Stokes Solver</h2>
         <p class="sub">Computational fluid dynamics</p>
-        <p>A two-dimensional incompressible Navier-Stokes solver built from first principles on a
-          staggered (MAC) grid, using Chorin projection with a spectral pressure solve and a
-          volume-penalisation immersed boundary for the cylinder. It reproduces the Ghia lid-driven
-          cavity benchmark to a root-mean-square error of order 10<sup>-3</sup>, and it captures the
-          von Kármán vortex street and the lock-in of vortex-induced vibration for an elastically
-          mounted cylinder. The verified forward solver is then inverted into a vortex flow-meter
-          that recovers the free-stream velocity from the measured shedding frequency.</p>
+        <p>I wrote a 2D incompressible Navier-Stokes solver from scratch (staggered grid, projection
+          method, an immersed cylinder). It reproduces the standard Ghia lid-driven-cavity benchmark
+          and shows the von Kármán vortex street behind the cylinder. Then I ran it backwards as a
+          vortex flow-meter, reading the flow speed off the frequency at which the wake sheds
+          vortices.</p>
         <div class="tags"><span>Navier-Stokes</span><span>Projection method</span><span>Immersed boundary</span><span>Fluid-structure interaction</span></div>
         <div class="btns">
           <a class="btn primary" href="https://bypire.github.io/vortex-street-cfd/">Live demo</a>
@@ -201,10 +190,9 @@
 
 <footer>
   <div class="wrap">
-    <p>Every result is checked against an analytical solution, an established benchmark or measured
-      data, and the scope and limitations of each model are stated in its report. The solvers are
-      written in Python (NumPy); the interactive demonstrations use plain JavaScript and run without
-      a server.</p>
+    <p>Each project has a short PDF write-up with the method, the checks I ran, and what the model
+      does not cover. The code is mostly Python (NumPy), and the demos are plain JavaScript that run
+      without a server.</p>
     <p><b>Muhammet Emir Fil</b> &middot; <a href="https://github.com/bypire">github.com/bypire</a>
       &middot; <a href="mailto:muhammetemirfil@gmail.com">muhammetemirfil@gmail.com</a></p>
   </div>
