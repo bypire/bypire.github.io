@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muhammet Emir Fil — Computational Engineering Science, RWTH Aachen</title>
+<meta name="description" content="Portfolio of verified computational-physics projects: inverse problems, optimal control, and CFD. B.Sc. Computational Engineering Science, RWTH Aachen.">
+<style>
+  :root{
+    --blue:#00549f; --blue-dark:#003d75; --blue-light:#8ebae5; --blue-bg:#eaf1f9;
+    --ink:#1b2733; --muted:#5b6b7b; --line:#dde5ee; --bg:#f6f9fc; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--blue); text-decoration:none}
+  .wrap{max-width:1020px; margin:0 auto; padding:0 22px}
+
+  /* header */
+  header{background:var(--blue); color:#fff; padding:38px 0 30px}
+  header .name{font-size:30px; font-weight:700; letter-spacing:.2px; margin:0}
+  header .role{font-size:16px; color:#dce8f6; margin:4px 0 0}
+  header .tag{font-size:15px; color:#cfe0f3; margin:14px 0 0; max-width:680px}
+  header .links{margin-top:16px; font-size:14.5px}
+  header .links a{
+    color:#fff; border:1px solid rgba(255,255,255,.45); border-radius:6px;
+    padding:5px 11px; margin-right:8px; display:inline-block; margin-top:6px;
+  }
+  header .links a:hover{background:rgba(255,255,255,.14)}
+  .accent{height:5px; background:var(--blue-light)}
+
+  /* intro strip */
+  .intro{padding:24px 0 6px; color:var(--muted); font-size:15.5px; max-width:760px}
+
+  /* grid */
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:22px; padding:18px 0 40px}
+  @media(max-width:720px){ .grid{grid-template-columns:1fr} }
+
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:11px;
+    overflow:hidden; display:flex; flex-direction:column;
+    transition:box-shadow .15s ease, transform .15s ease;
+  }
+  .card:hover{box-shadow:0 8px 26px rgba(0,60,117,.12); transform:translateY(-2px)}
+  .thumb{display:block; width:100%; aspect-ratio:16/9; object-fit:cover; background:#0d1117; border-bottom:1px solid var(--line)}
+  .card .body{padding:16px 18px 18px; display:flex; flex-direction:column; flex:1}
+  .card h2{font-size:18.5px; margin:0 0 3px; color:var(--blue-dark)}
+  .card .sub{font-size:13px; color:var(--muted); margin:0 0 10px; font-weight:600; letter-spacing:.2px; text-transform:uppercase}
+  .card p{margin:0 0 14px; font-size:14.5px; color:#33404d}
+  .tags{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 16px}
+  .tags span{
+    font-size:12px; color:var(--blue-dark); background:var(--blue-bg);
+    border:1px solid #d3e2f2; border-radius:999px; padding:3px 9px;
+  }
+  .btns{margin-top:auto; display:flex; flex-wrap:wrap; gap:8px}
+  .btn{font-size:13.5px; font-weight:600; border-radius:7px; padding:7px 13px; display:inline-block}
+  .btn.primary{background:var(--blue); color:#fff}
+  .btn.primary:hover{background:var(--blue-dark)}
+  .btn.ghost{border:1px solid var(--line); color:var(--blue); background:#fff}
+  .btn.ghost:hover{border-color:var(--blue-light); background:var(--blue-bg)}
+
+  /* footer */
+  footer{border-top:1px solid var(--line); padding:22px 0 40px; color:var(--muted); font-size:14px}
+  footer b{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1 class="name">Muhammet Emir Fil</h1>
+    <p class="role">B.Sc. Computational Engineering Science &middot; RWTH Aachen</p>
+    <p class="tag">I build physics simulations and check every result against ground truth &mdash;
+      an analytical solution, a published benchmark, or real measured data. Focus: inverse
+      problems and uncertainty, optimal control, and CFD.</p>
+    <div class="links">
+      <a href="https://github.com/bypire">GitHub &#8599;</a>
+      <a href="mailto:muhammetemirfil@gmail.com">Email</a>
+    </div>
+  </div>
+</header>
+<div class="accent"></div>
+
+<div class="wrap">
+  <p class="intro">Four projects. Each one is a working simulation with a short technical report
+    (PDF) and, where it helps, an interactive browser demo. The numerical core is Python (numpy);
+    the live demos are vanilla JavaScript and open without a server.</p>
+
+  <main class="grid">
+
+    <!-- 1. Multiphysics Hub -->
+    <article class="card">
+      <img class="thumb" src="assets/hub.png" alt="Multiphysics Hub screenshot">
+      <div class="body">
+        <h2>Multiphysics Hub</h2>
+        <p class="sub">Coupled real-time simulation</p>
+        <p>A top-down car driven live in the browser couples three physics at once: a four-wheel
+          vehicle with Pacejka tyres, a 2D fluid around the body, and a deflecting bridge. Each
+          model is verified in Python, then cross-checked against its JavaScript port.</p>
+        <div class="tags"><span>Vehicle dynamics</span><span>CFD</span><span>VBI</span><span>real-time JS</span></div>
+        <div class="btns">
+          <a class="btn primary" href="https://bypire.github.io/multiphysics-hub/">Live demo</a>
+          <a class="btn ghost" href="reports/multiphysics-hub.pdf">Report (PDF)</a>
+          <a class="btn ghost" href="https://github.com/bypire/multiphysics-hub">Code</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2. Bridge Weigh-in-Motion -->
+    <article class="card">
+      <img class="thumb" src="assets/vbi.png" alt="Bridge Weigh-in-Motion demo screenshot">
+      <div class="body">
+        <h2>Bridge Weigh-in-Motion</h2>
+        <p class="sub">Inverse problem &amp; uncertainty</p>
+        <p>Recovering a truck's axle weights from a bridge's response, as a regularized Bayesian
+          inverse problem: analytical verification, Tikhonov regularization of the ill-posed axle
+          split, uncertainty calibrated from model error, and validation on real KW51 data.</p>
+        <div class="tags"><span>Inverse problems</span><span>FEM</span><span>Bayesian UQ</span><span>regularization</span></div>
+        <div class="btns">
+          <a class="btn primary" href="https://bypire.github.io/bridgebeat/">Live demo</a>
+          <a class="btn ghost" href="reports/vbi.pdf">Report (PDF)</a>
+          <a class="btn ghost" href="https://github.com/bypire/vbi-bridge-sim">Code</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3. Optimal Racing Line -->
+    <article class="card">
+      <img class="thumb" src="assets/racing.png" alt="Optimal racing line figure">
+      <div class="body">
+        <h2>Optimal Racing Line</h2>
+        <p class="sub">Optimal control</p>
+        <p>The minimum-lap-time racing line computed as an optimal-control problem: arc-length
+          direct collocation with hand-derived analytic Jacobians, solved as an NLP and verified
+          against the closed-form skidpad optimum. The line emerges from the grip limit.</p>
+        <div class="tags"><span>Optimal control</span><span>direct collocation</span><span>NLP</span><span>scipy</span></div>
+        <div class="btns">
+          <a class="btn primary" href="https://bypire.github.io/optimal-racing-line/">Live demo</a>
+          <a class="btn ghost" href="reports/racing-line.pdf">Report (PDF)</a>
+          <a class="btn ghost" href="https://github.com/bypire/optimal-racing-line">Code</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4. Vortex Street CFD -->
+    <article class="card">
+      <img class="thumb" src="assets/cfd.png" alt="Von Karman vortex street vorticity field">
+      <div class="body">
+        <h2>Vortex Street CFD</h2>
+        <p class="sub">From-scratch Navier&ndash;Stokes</p>
+        <p>A 2D incompressible Navier&ndash;Stokes solver written from scratch (staggered MAC grid,
+          projection method), verified against the Ghia lid-driven-cavity benchmark, then inverted
+          into a vortex flow-meter that reads flow speed from the wake frequency.</p>
+        <div class="tags"><span>CFD</span><span>Navier&ndash;Stokes</span><span>projection method</span><span>inverse</span></div>
+        <div class="btns">
+          <a class="btn primary" href="https://bypire.github.io/vortex-street-cfd/">Live demo</a>
+          <a class="btn ghost" href="reports/cfd.pdf">Report (PDF)</a>
+          <a class="btn ghost" href="https://github.com/bypire/vortex-street-cfd">Code</a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Every result is checked against an analytical, benchmark, or real-data reference; the scope
+      and known limitations of each model are stated in its report. Built with numpy/Python and
+      vanilla JavaScript.</p>
+    <p><b>Muhammet Emir Fil</b> &middot; <a href="https://github.com/bypire">github.com/bypire</a>
+      &middot; <a href="mailto:muhammetemirfil@gmail.com">muhammetemirfil@gmail.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
