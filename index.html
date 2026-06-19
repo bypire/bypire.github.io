@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Muhammet Emir Fil — Computational Engineering Science, RWTH Aachen</title>
-<meta name="description" content="Portfolio of verified computational-physics projects: inverse problems, optimal control, and CFD. B.Sc. Computational Engineering Science, RWTH Aachen.">
+<title>Muhammet Emir Fil | Computational Engineering Science, RWTH Aachen</title>
+<meta name="description" content="Portfolio of computational engineering projects: forward simulations verified against analytical solutions, benchmarks and measured data, with the inverse and optimisation problems built on them. B.Sc. Computational Engineering Science, RWTH Aachen.">
 <style>
   :root{
     --blue:#00549f; --blue-dark:#003d75; --blue-light:#8ebae5; --blue-bg:#eaf1f9;
@@ -15,26 +15,26 @@
   body{
     margin:0; background:var(--bg); color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.55; -webkit-font-smoothing:antialiased;
+    line-height:1.6; -webkit-font-smoothing:antialiased;
   }
   a{color:var(--blue); text-decoration:none}
   .wrap{max-width:1020px; margin:0 auto; padding:0 22px}
 
   /* header */
-  header{background:var(--blue); color:#fff; padding:38px 0 30px}
-  header .name{font-size:30px; font-weight:700; letter-spacing:.2px; margin:0}
-  header .role{font-size:16px; color:#dce8f6; margin:4px 0 0}
-  header .tag{font-size:15px; color:#cfe0f3; margin:14px 0 0; max-width:680px}
-  header .links{margin-top:16px; font-size:14.5px}
+  header{background:var(--blue); color:#fff; padding:40px 0 32px}
+  header .name{font-size:31px; font-weight:700; letter-spacing:.2px; margin:0}
+  header .role{font-size:16px; color:#dce8f6; margin:5px 0 0}
+  header .tag{font-size:15px; color:#cfe0f3; margin:16px 0 0; max-width:720px}
+  header .links{margin-top:18px; font-size:14.5px}
   header .links a{
     color:#fff; border:1px solid rgba(255,255,255,.45); border-radius:6px;
-    padding:5px 11px; margin-right:8px; display:inline-block; margin-top:6px;
+    padding:5px 12px; margin-right:8px; display:inline-block; margin-top:6px;
   }
   header .links a:hover{background:rgba(255,255,255,.14)}
   .accent{height:5px; background:var(--blue-light)}
 
   /* intro strip */
-  .intro{padding:24px 0 6px; color:var(--muted); font-size:15.5px; max-width:760px}
+  .intro{padding:26px 0 6px; color:var(--muted); font-size:15.5px; max-width:790px}
 
   /* grid */
   .grid{display:grid; grid-template-columns:1fr 1fr; gap:22px; padding:18px 0 40px}
@@ -47,9 +47,9 @@
   }
   .card:hover{box-shadow:0 8px 26px rgba(0,60,117,.12); transform:translateY(-2px)}
   .thumb{display:block; width:100%; aspect-ratio:16/9; object-fit:cover; background:#0d1117; border-bottom:1px solid var(--line)}
-  .card .body{padding:16px 18px 18px; display:flex; flex-direction:column; flex:1}
+  .card .body{padding:17px 19px 19px; display:flex; flex-direction:column; flex:1}
   .card h2{font-size:18.5px; margin:0 0 3px; color:var(--blue-dark)}
-  .card .sub{font-size:13px; color:var(--muted); margin:0 0 10px; font-weight:600; letter-spacing:.2px; text-transform:uppercase}
+  .card .sub{font-size:12.5px; color:var(--muted); margin:0 0 11px; font-weight:600; letter-spacing:.3px; text-transform:uppercase}
   .card p{margin:0 0 14px; font-size:14.5px; color:#33404d}
   .tags{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 16px}
   .tags span{
@@ -64,8 +64,9 @@
   .btn.ghost:hover{border-color:var(--blue-light); background:var(--blue-bg)}
 
   /* footer */
-  footer{border-top:1px solid var(--line); padding:22px 0 40px; color:var(--muted); font-size:14px}
+  footer{border-top:1px solid var(--line); padding:24px 0 44px; color:var(--muted); font-size:14px}
   footer b{color:var(--ink)}
+  sup{font-size:.72em}
 </style>
 </head>
 <body>
@@ -74,11 +75,12 @@
   <div class="wrap">
     <h1 class="name">Muhammet Emir Fil</h1>
     <p class="role">B.Sc. Computational Engineering Science &middot; RWTH Aachen</p>
-    <p class="tag">I build physics simulations and check every result against ground truth &mdash;
-      an analytical solution, a published benchmark, or real measured data. Focus: inverse
-      problems and uncertainty, optimal control, and CFD.</p>
+    <p class="tag">Computational engineering, with a focus on simulation and identification. Each
+      project builds a forward model, verifies it against an analytical solution, a published
+      benchmark or measured data, and then uses it to solve the associated inverse or optimisation
+      problem.</p>
     <div class="links">
-      <a href="https://github.com/bypire">GitHub &#8599;</a>
+      <a href="https://github.com/bypire">GitHub</a>
       <a href="mailto:muhammetemirfil@gmail.com">Email</a>
     </div>
   </div>
@@ -86,22 +88,30 @@
 <div class="accent"></div>
 
 <div class="wrap">
-  <p class="intro">Four projects. Each one is a working simulation with a short technical report
-    (PDF) and, where it helps, an interactive browser demo. The numerical core is Python (numpy);
-    the live demos are vanilla JavaScript and open without a server.</p>
+  <p class="intro">This portfolio collects four projects. Each one consists of a numerical solver
+    written in Python (NumPy), a short technical report that documents the method and its
+    verification, and, for most of them, an interactive demonstration that runs in the browser
+    without a server. The emphasis throughout is on results that can be checked against an
+    independent reference.</p>
 
   <main class="grid">
 
     <!-- 1. Multiphysics Hub -->
     <article class="card">
-      <img class="thumb" src="assets/hub.png" alt="Multiphysics Hub screenshot">
+      <img class="thumb" src="assets/hub.png" alt="Multiphysics Hub: car on a bridge with aerodynamics and structural panels">
       <div class="body">
         <h2>Multiphysics Hub</h2>
         <p class="sub">Coupled real-time simulation</p>
-        <p>A top-down car driven live in the browser couples three physics at once: a four-wheel
-          vehicle with Pacejka tyres, a 2D fluid around the body, and a deflecting bridge. Each
-          model is verified in Python, then cross-checked against its JavaScript port.</p>
-        <div class="tags"><span>Vehicle dynamics</span><span>CFD</span><span>VBI</span><span>real-time JS</span></div>
+        <p>An interactive application in which a single vehicle is driven in real time around an
+          editable track while three coupled simulations are recomputed every frame. The vehicle is
+          a four-wheel (double-track) model with Pacejka tyres and longitudinal and lateral load
+          transfer. A two-dimensional fluid solver computes the flow around the body and returns the
+          aerodynamic drag and downforce that act back on the tyres. A modal moving-load beam
+          represents a bridge that deflects under the wheel load. Each model is first verified in
+          Python against an analytical or finite-element reference, then reimplemented in
+          JavaScript; the two implementations agree to about 10<sup>-13</sup> for the vehicle and
+          10<sup>-9</sup> metres for the bridge.</p>
+        <div class="tags"><span>Vehicle dynamics</span><span>CFD</span><span>Structural dynamics</span><span>Real-time JavaScript</span></div>
         <div class="btns">
           <a class="btn primary" href="https://bypire.github.io/multiphysics-hub/">Live demo</a>
           <a class="btn ghost" href="reports/multiphysics-hub.pdf">Report (PDF)</a>
@@ -112,14 +122,20 @@
 
     <!-- 2. Bridge Weigh-in-Motion -->
     <article class="card">
-      <img class="thumb" src="assets/vbi.png" alt="Bridge Weigh-in-Motion demo screenshot">
+      <img class="thumb" src="assets/vbi.png" alt="Bridge Weigh-in-Motion interactive demonstration">
       <div class="body">
         <h2>Bridge Weigh-in-Motion</h2>
-        <p class="sub">Inverse problem &amp; uncertainty</p>
-        <p>Recovering a truck's axle weights from a bridge's response, as a regularized Bayesian
-          inverse problem: analytical verification, Tikhonov regularization of the ill-posed axle
-          split, uncertainty calibrated from model error, and validation on real KW51 data.</p>
-        <div class="tags"><span>Inverse problems</span><span>FEM</span><span>Bayesian UQ</span><span>regularization</span></div>
+        <p class="sub">Inverse problem and uncertainty quantification</p>
+        <p>An instrumented bridge can be used to weigh trucks in motion by inverting its measured
+          bending response. This project implements the forward model, an Euler-Bernoulli beam under
+          a moving, suspension-coupled vehicle load, and the recovery of the axle weights from the
+          response. The recovery is treated as an ill-posed inverse problem: Tikhonov regularisation
+          with L-curve parameter selection stabilises the closely spaced (tandem) axle case, and a
+          Bayesian formulation returns a credible interval whose width is calibrated from the model
+          error rather than assumed. The forward model is verified against the Frýba closed-form
+          solution, and the structural-health component is validated against sixteen months of
+          measured modal data from the KW51 bridge.</p>
+        <div class="tags"><span>Inverse problems</span><span>Finite elements</span><span>Bayesian UQ</span><span>Regularisation</span></div>
         <div class="btns">
           <a class="btn primary" href="https://bypire.github.io/bridgebeat/">Live demo</a>
           <a class="btn ghost" href="reports/vbi.pdf">Report (PDF)</a>
@@ -130,14 +146,19 @@
 
     <!-- 3. Optimal Racing Line -->
     <article class="card">
-      <img class="thumb" src="assets/racing.png" alt="Optimal racing line figure">
+      <img class="thumb" src="assets/racing.png" alt="Optimal racing line coloured by speed, with g-g diagram">
       <div class="body">
         <h2>Optimal Racing Line</h2>
-        <p class="sub">Optimal control</p>
-        <p>The minimum-lap-time racing line computed as an optimal-control problem: arc-length
-          direct collocation with hand-derived analytic Jacobians, solved as an NLP and verified
-          against the closed-form skidpad optimum. The line emerges from the grip limit.</p>
-        <div class="tags"><span>Optimal control</span><span>direct collocation</span><span>NLP</span><span>scipy</span></div>
+        <p class="sub">Trajectory optimisation and optimal control</p>
+        <p>The fastest line around a circuit is computed as the solution of a minimum-lap-time
+          optimal-control problem rather than prescribed by hand. Taking arc length along the track
+          as the independent variable removes the free final time, and the problem is transcribed to
+          a nonlinear program by trapezoidal direct collocation with analytically derived Jacobians,
+          then solved by sequential quadratic programming. On a 2.4 km circuit the optimised line is
+          8.1 percent faster than the geometric centreline and operates at the tyre grip limit for
+          almost the entire lap. The result is verified against the closed-form skidpad lap time and
+          confirmed to converge under mesh refinement.</p>
+        <div class="tags"><span>Optimal control</span><span>Direct collocation</span><span>Nonlinear programming</span><span>Vehicle dynamics</span></div>
         <div class="btns">
           <a class="btn primary" href="https://bypire.github.io/optimal-racing-line/">Live demo</a>
           <a class="btn ghost" href="reports/racing-line.pdf">Report (PDF)</a>
@@ -148,14 +169,18 @@
 
     <!-- 4. Vortex Street CFD -->
     <article class="card">
-      <img class="thumb" src="assets/cfd.png" alt="Von Karman vortex street vorticity field">
+      <img class="thumb" src="assets/cfd.png" alt="von Karman vortex street vorticity field at Reynolds number 100">
       <div class="body">
-        <h2>Vortex Street CFD</h2>
-        <p class="sub">From-scratch Navier&ndash;Stokes</p>
-        <p>A 2D incompressible Navier&ndash;Stokes solver written from scratch (staggered MAC grid,
-          projection method), verified against the Ghia lid-driven-cavity benchmark, then inverted
-          into a vortex flow-meter that reads flow speed from the wake frequency.</p>
-        <div class="tags"><span>CFD</span><span>Navier&ndash;Stokes</span><span>projection method</span><span>inverse</span></div>
+        <h2>Incompressible Flow Solver</h2>
+        <p class="sub">Computational fluid dynamics</p>
+        <p>A two-dimensional incompressible Navier-Stokes solver built from first principles on a
+          staggered (MAC) grid, using Chorin projection with a spectral pressure solve and a
+          volume-penalisation immersed boundary for the cylinder. It reproduces the Ghia lid-driven
+          cavity benchmark to a root-mean-square error of order 10<sup>-3</sup>, and it captures the
+          von Kármán vortex street and the lock-in of vortex-induced vibration for an elastically
+          mounted cylinder. The verified forward solver is then inverted into a vortex flow-meter
+          that recovers the free-stream velocity from the measured shedding frequency.</p>
+        <div class="tags"><span>Navier-Stokes</span><span>Projection method</span><span>Immersed boundary</span><span>Fluid-structure interaction</span></div>
         <div class="btns">
           <a class="btn primary" href="https://bypire.github.io/vortex-street-cfd/">Live demo</a>
           <a class="btn ghost" href="reports/cfd.pdf">Report (PDF)</a>
@@ -169,9 +194,10 @@
 
 <footer>
   <div class="wrap">
-    <p>Every result is checked against an analytical, benchmark, or real-data reference; the scope
-      and known limitations of each model are stated in its report. Built with numpy/Python and
-      vanilla JavaScript.</p>
+    <p>Every result is checked against an analytical solution, an established benchmark or measured
+      data, and the scope and limitations of each model are stated in its report. The solvers are
+      written in Python (NumPy); the interactive demonstrations use plain JavaScript and run without
+      a server.</p>
     <p><b>Muhammet Emir Fil</b> &middot; <a href="https://github.com/bypire">github.com/bypire</a>
       &middot; <a href="mailto:muhammetemirfil@gmail.com">muhammetemirfil@gmail.com</a></p>
   </div>
