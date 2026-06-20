@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Muhammet Emir Fil | Computational Engineering Science, RWTH Aachen</title>
 <meta name="description" content="Portfolio of computational engineering projects: forward simulations verified against analytical solutions, benchmarks and measured data, with the inverse and optimisation problems built on them. B.Sc. Computational Engineering Science, RWTH Aachen.">
+<script>document.documentElement.classList.add('js')</script>
 <style>
   :root{
     --blue:#00549f; --blue-dark:#003d75; --blue-light:#8ebae5; --blue-bg:#eaf1f9;
@@ -21,7 +22,9 @@
   .wrap{max-width:1020px; margin:0 auto; padding:0 22px}
 
   /* header */
-  header{background:var(--blue); color:#fff; padding:40px 0 32px}
+  header{background:var(--blue); color:#fff; padding:40px 0 32px; position:relative; overflow:hidden}
+  #flow{position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.6}
+  header > .wrap{position:relative; z-index:1}
   header .name{font-size:31px; font-weight:700; letter-spacing:.2px; margin:0}
   header .role{font-size:16px; color:#dce8f6; margin:5px 0 0}
   header .tag{font-size:15px; color:#cfe0f3; margin:16px 0 0; max-width:720px}
@@ -48,9 +51,15 @@
   .card{
     background:var(--card); border:1px solid var(--line); border-radius:11px;
     overflow:hidden; display:flex; flex-direction:column;
-    transition:box-shadow .15s ease, transform .15s ease;
+    transition:opacity .55s ease, transform .4s ease, box-shadow .18s ease;
   }
-  .card:hover{box-shadow:0 8px 26px rgba(0,60,117,.12); transform:translateY(-2px)}
+  .js .card{opacity:0; transform:translateY(16px)}
+  .js .card.in{opacity:1; transform:translateY(0)}
+  .card.in:hover{box-shadow:0 10px 30px rgba(0,60,117,.15); transform:translateY(-3px)}
+  @media (prefers-reduced-motion: reduce){
+    #flow{display:none}
+    .card{opacity:1; transform:none; transition:box-shadow .18s ease}
+  }
   .thumb{display:block; width:100%; aspect-ratio:16/9; object-fit:cover; background:#0d1117; border-bottom:1px solid var(--line)}
   .card .body{padding:17px 19px 19px; display:flex; flex-direction:column; flex:1}
   .card h2{font-size:18.5px; margin:0 0 3px; color:var(--blue-dark)}
@@ -77,6 +86,7 @@
 <body>
 
 <header>
+  <canvas id="flow" aria-hidden="true"></canvas>
   <div class="wrap">
     <h1 class="name">Muhammet Emir Fil</h1>
     <p class="role">B.Sc. Computational Engineering Science &middot; RWTH Aachen</p>
@@ -200,6 +210,82 @@
       &middot; <a href="mailto:muhammetemirfil@gmail.com">muhammetemirfil@gmail.com</a></p>
   </div>
 </footer>
+
+<script>
+(function(){
+  // reveal project cards as they scroll into view
+  var cards = document.querySelectorAll('.card');
+  if (!('IntersectionObserver' in window)) {
+    cards.forEach(function(c){ c.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.15});
+    cards.forEach(function(c){ io.observe(c); });
+  }
+
+  // live flow field in the header (a light, real-time particle advection,
+  // evocative of the vortex street from the CFD project)
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cv = document.getElementById('flow');
+  if (!cv || reduce) return;
+  var ctx = cv.getContext('2d'), header = cv.parentElement;
+  var W = 0, H = 0, parts = [], vortices = [];
+
+  function seed(){
+    var N = Math.min(640, Math.max(120, Math.round(W * H / 1700)));
+    parts = [];
+    for (var i = 0; i < N; i++){
+      var x = Math.random() * W, y = Math.random() * H;
+      parts.push({ x:x, y:y, px:x, py:y });
+    }
+  }
+  function resize(){
+    W = header.clientWidth; H = header.clientHeight;
+    cv.width = W; cv.height = H;
+    var n = Math.max(3, Math.round(W / 260));
+    vortices = [];
+    for (var i = 0; i < n; i++){
+      vortices.push({ x:(i + 0.5) / n * W,
+                      y:H * (i % 2 ? 0.62 : 0.38),
+                      s:(i % 2 ? 1 : -1) * (9000 + 2600 * (i % 3)) });
+    }
+    seed();
+  }
+  function vel(x, y){
+    var vx = 26, vy = 0;                 // base drift to the right
+    for (var i = 0; i < vortices.length; i++){
+      var v = vortices[i], dx = x - v.x, dy = y - v.y, f = v.s / (dx*dx + dy*dy + 1600);
+      vx += -dy * f; vy += dx * f;       // tangential, decaying with distance
+    }
+    return [vx, vy];
+  }
+  var last = 0;
+  function frame(t){
+    if (document.hidden){ requestAnimationFrame(frame); return; }
+    var dt = (t - last) / 1000; last = t;
+    if (!(dt > 0) || dt > 0.05) dt = 0.016;
+    ctx.fillStyle = 'rgba(0,61,117,0.12)';     // trailing fade in the header blue
+    ctx.fillRect(0, 0, W, H);
+    ctx.lineWidth = 1.1; ctx.strokeStyle = 'rgba(190,216,245,0.5)';
+    ctx.beginPath();
+    for (var i = 0; i < parts.length; i++){
+      var p = parts[i], uv = vel(p.x, p.y);
+      p.px = p.x; p.py = p.y;
+      p.x += uv[0] * dt; p.y += uv[1] * dt;
+      if (p.x > W + 5 || p.x < -5 || p.y < -5 || p.y > H + 5){
+        p.x = -Math.random() * 30; p.y = Math.random() * H; p.px = p.x; p.py = p.y; continue;
+      }
+      ctx.moveTo(p.px, p.py); ctx.lineTo(p.x, p.y);
+    }
+    ctx.stroke();
+    requestAnimationFrame(frame);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  requestAnimationFrame(frame);
+})();
+</script>
 
 </body>
 </html>
