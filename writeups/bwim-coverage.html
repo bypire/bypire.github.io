@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When a 95% interval is 0% reliable | Muhammet Emir Fil</title>
+<meta name="description" content="A short note on model-error-aware uncertainty in Bridge Weigh-in-Motion: why a nominally 95% credible interval can have near-zero true coverage on a dynamic bridge, and how a physics-derived term restores calibration.">
+<style>
+  :root{ --blue:#00549f; --blue-dark:#003d75; --ink:#1b2733; --muted:#5b6b7b;
+         --line:#dde5ee; --bg:#f6f9fc; --card:#fff; }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:var(--blue); text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:760px; margin:0 auto; padding:0 22px}
+  header{background:var(--blue); color:#fff; padding:30px 0 26px}
+  header .back{font-size:13px; color:#cfe0f3}
+  header h1{font-size:26px; margin:10px 0 6px; line-height:1.25}
+  header .sub{font-size:14.5px; color:#dce8f6; margin:0}
+  .accent{height:5px; background:#8ebae5}
+  article{padding:26px 0 50px; font-size:16px}
+  article h2{color:var(--blue-dark); font-size:19px; margin:26px 0 8px}
+  article p{margin:0 0 14px}
+  figure{margin:22px 0; background:var(--card); border:1px solid var(--line);
+    border-radius:11px; padding:14px}
+  figure img{display:block; width:100%; border-radius:6px}
+  figcaption{font-size:13.5px; color:var(--muted); margin-top:9px}
+  code{background:#eef3f9; border:1px solid #dce6f2; border-radius:5px; padding:1px 5px;
+    font-size:14px}
+  .lead{font-size:17.5px; color:#33404d}
+  .meta{font-size:13.5px; color:var(--muted); border-top:1px solid var(--line);
+    margin-top:30px; padding-top:16px}
+  blockquote{margin:18px 0; padding:10px 18px; border-left:3px solid var(--blue);
+    background:#eef3f9; border-radius:0 8px 8px 0; color:#2a3744}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="back"><a href="../" style="color:#fff">&larr; Muhammet Emir Fil</a></div>
+    <h1>When a 95&nbsp;percent interval is 0&nbsp;percent reliable</h1>
+    <p class="sub">Model error in Bridge Weigh-in-Motion, and how to calibrate the uncertainty from physics</p>
+  </div>
+</header>
+<div class="accent"></div>
+
+<div class="wrap">
+<article>
+
+<p class="lead">Bridge Weigh-in-Motion recovers a truck's axle weights by inverting the bending
+response of an instrumented bridge. A Bayesian version of the recovery returns not just a number
+but a 95&nbsp;percent credible interval. The interesting question is not the number; it is whether
+you can trust the interval. On a dynamic bridge, the honest answer is that a naive interval is far
+more confident than it has any right to be.</p>
+
+<h2>A reassuring test that proves almost nothing</h2>
+<p>The recovery is a linear-Gaussian inverse problem: the recovered weight has a mean (the
+least-squares estimate) and a covariance built from the fit residual. From these follows a
+95&nbsp;percent credible interval. The natural check is a coverage test: generate many synthetic
+crossings, recover the weight, and count how often the true weight falls inside the interval.</p>
+<p>When the synthetic data and the inverse both use the same static influence line, the test
+returns <strong>95.3&nbsp;percent coverage</strong>. That looks like a calibrated interval. It is
+not, or rather it only confirms that the linear-Gaussian machinery is implemented correctly. The
+forward and inverse models agree by construction, so the test cannot see any error that comes from
+the model itself. It is circular.</p>
+
+<h2>The honest test, where the interval collapses</h2>
+<p>The honest test replaces the forward model with the full coupled dynamic finite-element model: a
+beam with a moving, suspension-coupled vehicle, integrated in time. Now the recovered weight is
+biased by dynamic amplification, from about <code>+0.3 percent</code> at very low speed to about
+<code>+5 percent</code> at 40&nbsp;m/s. Crucially, the fit residual still looks small, because the
+measured signal still has the shape of an influence-line response; the residual measures goodness
+of fit, not the dynamic error in the <em>scale</em> of the answer.</p>
+<p>So the interval stays narrow while the estimate drifts away from the truth. The true coverage of
+the nominal 95&nbsp;percent interval <strong>collapses toward zero</strong>: the interval almost
+never contains the true weight, even though it is labelled 95&nbsp;percent.</p>
+
+<figure>
+  <img src="coverage.png" alt="Coverage of the nominal 95 percent interval: 95.3 percent in the self-consistent test, collapsing under the dynamic forward model, restored by a 3.1 percent model-error term">
+  <figcaption>The self-consistent coverage is 95.3&nbsp;percent (left), which only verifies the
+  machinery. Under the real dynamic forward model the nominal-95&nbsp;percent interval's true
+  coverage collapses; adding a physics-derived model-error term of about 3.1&nbsp;percent restores
+  it to nominal.</figcaption>
+</figure>
+
+<h2>Calibrating the uncertainty from the physics</h2>
+<p>The fix is not to widen the interval by an arbitrary fudge factor. The missing term has a
+physical value: the root-mean-square dynamic bias over the highway speed band is about
+<code>3.1 percent</code>. This number comes from the dynamics the static inverse ignored, not from
+an assumption. Inflating the posterior by this model-error term brings the true coverage back to
+nominal.</p>
+
+<blockquote>A calibrated uncertainty has to account for model error, not only measurement noise. On
+this bridge, the model error is the dominant term, and it can be quantified from the physics rather
+than guessed.</blockquote>
+
+<h2>Why it matters</h2>
+<p>An overload-enforcement decision is only as good as the confidence attached to it. Reporting a
+weight with a 95&nbsp;percent interval that is really a 0&nbsp;percent interval is worse than
+reporting no interval at all, because it invites false confidence. Separating verification (is the
+maths right) from validation (does the answer mean something) is what surfaces this, and it
+generalises well beyond bridges: whenever an inverse problem is solved with a simplified forward
+model, the uncertainty must include the error of that simplification.</p>
+
+<p class="meta">This note summarises one result from my Bridge Weigh-in-Motion project. The check
+is reproduced by <code>verify_coverage.py</code>. Full method and references are in the
+<a href="../reports/vbi.pdf">project report (PDF)</a>; the interactive demo is
+<a href="https://bypire.github.io/bridgebeat/">here</a>. &nbsp;&middot;&nbsp;
+<a href="../">Back to the portfolio</a></p>
+
+</article>
+</div>
+
+</body>
+</html>
