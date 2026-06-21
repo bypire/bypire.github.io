@@ -107,7 +107,7 @@
 <div class="wrap">
   <p class="intro">Each project has the code (Python, mostly NumPy), a short write-up as a PDF
     explaining the method and where it is verified, and for most of them a demo that runs in the
-    browser. I try to keep every result tied to something I can check it against.</p>
+    browser.</p>
   <p class="intro" style="padding-top:4px">Short note:
     <a href="writeups/bwim-coverage.html">When a 95 percent interval is 0 percent reliable</a>,
     on model error in Bridge Weigh-in-Motion.</p>
@@ -140,12 +140,12 @@
       <img class="thumb" src="assets/vbi.png" alt="Bridge Weigh-in-Motion interactive demonstration">
       <div class="body">
         <h2>Bridge Weigh-in-Motion</h2>
-        <p class="sub">An inverse problem with honest error bars</p>
+        <p class="sub">An inverse problem with quantified error bars</p>
         <p>If you put strain sensors on a bridge, you can weigh the trucks driving over it by working
           backwards from how the bridge bends. I built the forward simulation (a beam under a moving,
           bouncing vehicle) and then the inverse that recovers the axle weights. The inverse is
           ill-posed when two axles are close together, so I added Tikhonov regularisation, and a
-          Bayesian version to get a real error bar instead of a guessed one. I checked the forward
+          Bayesian version for a calibrated error bar. I checked the forward
           model against Frýba's closed-form solution, and tested the monitoring idea on 16 months of
           actual measurements from the KW51 bridge.</p>
         <div class="tags"><span>Inverse problems</span><span>Finite elements</span><span>Bayesian UQ</span><span>Regularisation</span></div>
